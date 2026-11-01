@@ -166,6 +166,51 @@ nav.bar{height:calc(48px + env(safe-area-inset-top));padding-top:env(safe-area-i
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav.bar,.tabbar,.tile{background:rgba(24,24,26,.96)!important}}
 @supports not (aspect-ratio:1){.player{height:0;padding-top:133.333%}}
 
+/* ===== liquid glass tab bar (mobile) ===== */
+[data-view=mobile] body{padding-bottom:calc(6rem + env(safe-area-inset-bottom))}
+[data-view=mobile] .tabbar{bottom:calc(.6rem + env(safe-area-inset-bottom));width:min(calc(100% - 1.5rem),406px);padding:.35rem;gap:.15rem;border:0;border-radius:2.25rem;background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.05) 45%,rgba(255,255,255,.11));-webkit-backdrop-filter:blur(20px) saturate(200%) brightness(1.1);backdrop-filter:blur(20px) saturate(200%) brightness(1.1);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),inset 0 -1px 1px rgba(255,255,255,.14),inset 0 0 22px rgba(255,255,255,.07),0 12px 32px rgba(0,0,0,.5),0 0 0 .5px rgba(255,255,255,.2)}
+[data-view=mobile] .tabbar::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.22),transparent 50%);pointer-events:none}
+[data-view=mobile] .tabbar a{position:relative;flex:1;padding:.5rem .25rem;border-radius:1.75rem;color:#e5e5ea}
+[data-view=mobile] .tabbar a.on{color:var(--blue);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.07));box-shadow:inset 0 1px 1px rgba(255,255,255,.55),inset 0 -1px 1px rgba(255,255,255,.12),0 4px 14px rgba(0,0,0,.3)}
+/* ===== liquid glass lens: slides, stretches and can be dragged ===== */
+.lens{display:none}
+[data-view=mobile] .tabbar,[data-view=mobile] .tabbar a{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-user-drag:none}
+[data-view=mobile] .tabbar a.on{background:none;box-shadow:none}
+[data-view=mobile] .tabbar a{z-index:1}
+[data-view=mobile] .tabbar.dragging a.on:not(.hot){color:#e5e5ea}
+[data-view=mobile] .tabbar a.hot{color:var(--blue)}
+[data-view=mobile] .lens{display:block;position:absolute;left:0;top:0;border-radius:1.75rem;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.08));box-shadow:inset 0 1px 1px rgba(255,255,255,.7),inset 0 -1px 1px rgba(255,255,255,.15),inset 0 0 14px rgba(255,255,255,.1),0 6px 18px rgba(0,0,0,.35);transition:translate .55s cubic-bezier(.3,1.35,.5,1),scale .4s cubic-bezier(.3,1.5,.5,1),background .3s,box-shadow .3s}
+[data-view=mobile] .lens.drag{transition:scale .4s cubic-bezier(.3,1.5,.5,1),background .3s,box-shadow .3s}
+[data-view=mobile] .tabbar.press .lens{scale:1.25 1.18;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.13));box-shadow:inset 0 1px 2px rgba(255,255,255,.85),inset 0 -1px 1px rgba(255,255,255,.2),inset 0 0 18px rgba(255,255,255,.16),0 10px 26px rgba(0,0,0,.45)}
+/* ===== follower goal ===== */
+.goal{margin-top:2rem;padding:1.25rem 1.5rem;border-radius:1.5rem;background:rgba(28,28,30,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 .5px rgba(255,255,255,.14),inset 0 1px 0 rgba(255,255,255,.07);max-width:34rem}
+.goal .row{display:flex;justify-content:space-between;gap:1rem;font-weight:600;letter-spacing:-.02em}
+.goal .row span:last-child{color:var(--gray);font-weight:500}
+.gtrack{height:8px;margin:.9rem 0 .6rem;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}
+.gtrack i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink))}
+.goal small{color:var(--gray);font-size:.875rem}
+[data-view=mobile] .goal{padding:1rem 1.15rem}
+/* ===== liquid glass v2: clearer glass, gradient rims, lens above the bar ===== */
+.tglass{display:none}
+[data-view=mobile] .tabbar{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+[data-view=mobile] .tabbar::before{display:none}
+[data-view=mobile] .tglass{display:block;position:absolute;inset:0;border-radius:2.25rem;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.02) 42%,rgba(255,255,255,.07));
+  -webkit-backdrop-filter:var(--lgbar,blur(7px)) saturate(190%) brightness(1.06);backdrop-filter:var(--lgbar,blur(7px)) saturate(190%) brightness(1.06);
+  box-shadow:inset 0 1.5px 3px rgba(255,255,255,.4),inset 0 -1px 2px rgba(255,255,255,.14),inset 0 0 18px rgba(255,255,255,.06),0 20px 40px -10px rgba(0,0,0,.6),0 2px 8px rgba(0,0,0,.35)}
+[data-view=mobile] .tglass::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(120% 90% at 18% -25%,rgba(255,255,255,.24),transparent 55%)}
+[data-view=mobile] .tglass::after,[data-view=mobile] .lens::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.2px;
+  background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.06) 30%,rgba(255,255,255,.04) 68%,rgba(255,255,255,.7));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+[data-view=mobile] .lens{background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03));
+  -webkit-backdrop-filter:var(--lglens,blur(1.5px)) saturate(190%) brightness(1.2);backdrop-filter:var(--lglens,blur(1.5px)) saturate(190%) brightness(1.2);
+  box-shadow:inset 0 1.5px 2px rgba(255,255,255,.75),inset 0 -1.5px 2px rgba(255,255,255,.3),inset 0 0 14px rgba(255,255,255,.14),0 8px 18px rgba(0,0,0,.3)}
+[data-view=mobile] .tabbar.press .lens{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.05));
+  -webkit-backdrop-filter:var(--lglens,blur(1px)) saturate(210%) brightness(1.3);backdrop-filter:var(--lglens,blur(1px)) saturate(210%) brightness(1.3);
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.9),inset 0 -2px 3px rgba(255,255,255,.4),inset 0 0 18px rgba(255,255,255,.2),0 12px 26px rgba(0,0,0,.4)}
+[data-view=mobile] .tabbar a{color:#f2f2f7;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+[data-view=mobile] .tabbar a.on,[data-view=mobile] .tabbar a.hot{color:#4da3ff}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){[data-view=mobile] .tglass{background:rgba(24,24,26,.96)}}
 @media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -271,6 +316,11 @@ d.dataset.view=v;if(/iPhone|iPod|iPad/.test(ua)||(navigator.platform==='MacIntel
     <div class="wrap">
       <h2>Packs. <span class="grad">Coming soon.</span></h2>
       <p class="lede">Effect and edit packs are on the way. Follow <a href="https://www.tiktok.com/@newn3yfx" target="_blank" rel="noopener" style="color:var(--blue)">@newn3yfx</a> to see them first.</p>
+      <div class="goal" id="goal" hidden>
+        <div class="row"><span id="gcount">–</span><span id="gnext">–</span></div>
+        <div class="gtrack"><i id="gbar"></i></div>
+        <small id="gtext"></small>
+      </div>
       <div class="packs">
         <!-- EDIT: rename each pack and add a cover image when it is ready -->
         <div class="pack tilt" style="--a:#2997ff;--b:#bf5af2"><span class="soon">Coming soon at 100 followers</span><h3>Pack 1</h3><p class="price">Free</p></div>
@@ -293,6 +343,8 @@ d.dataset.view=v;if(/iPhone|iPod|iPad/.test(ua)||(navigator.platform==='MacIntel
 
 <footer>© <span id="yr">2026</span> n3yfx. All videos belong to their creator.<button id="vswitch" class="vswitch" type="button"></button></footer>
 <nav class="tabbar" aria-label="Tabs">
+  <i class="tglass" aria-hidden="true"></i>
+  <i class="lens" aria-hidden="true"></i>
   <a href="#top" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg><span>Home</span></a>
   <a href="#work"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span>Previews</span></a>
   <a href="#packs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Packs</span></a>
@@ -392,6 +444,124 @@ d.dataset.view=v;if(/iPhone|iPod|iPad/.test(ua)||(navigator.platform==='MacIntel
     (function step(t){var k=Math.min((t-t0)/1200,1);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&!RM)requestAnimationFrame(step);else el.textContent=to})(t0);
   })},{threshold:.6});
   document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el)});
+  /* ---------- liquid glass tab bar: tap to slide, press and drag the lens ---------- */
+  (function(){
+    var bar=document.querySelector('.tabbar'),lens=bar.querySelector('.lens');
+    var links=[].slice.call(bar.querySelectorAll('a')),cur=0,drag=null,sup=false;
+    function idxOn(){for(var i=0;i<links.length;i++)if(links[i].classList.contains('on'))return i;return 0}
+    function place(i,instant){
+      var a=links[i];if(!a||!a.offsetWidth)return;
+      if(instant)lens.classList.add('drag');
+      lens.style.width=a.offsetWidth+'px';lens.style.height=a.offsetHeight+'px';lens.style.top=a.offsetTop+'px';
+      lens.style.translate=a.offsetLeft+'px 0';
+      if(instant){void lens.offsetWidth;lens.classList.remove('drag')}
+      cur=i;
+    }
+    function squash(){if(!RM&&lens.animate)lens.animate([{transform:'scale(1,1)'},{transform:'scale(1.32,.9)',offset:.4},{transform:'scale(1,1)'}],{duration:520,easing:'ease-out'})}
+    function setOn(i){links.forEach(function(l,k){if(l.target!=='_blank')l.classList.toggle('on',k===i)})}
+    function go(i){if(i!==cur)squash();setOn(i);place(i)}
+    links.forEach(function(a,k){a.addEventListener('click',function(){if(a.target!=='_blank')go(k)})});
+    new MutationObserver(function(){if(!drag){var i=idxOn();if(i!==cur){squash();place(i)}}}).observe(bar,{attributes:true,subtree:true,attributeFilter:['class']});
+
+    bar.addEventListener('pointerdown',function(e){
+      var x=e.clientX-bar.getBoundingClientRect().left,a=links[cur];
+      var hit=x>=a.offsetLeft&&x<=a.offsetLeft+a.offsetWidth;
+      drag={id:e.pointerId,sx:e.clientX,grab:hit,moved:false,off:x-(a.offsetLeft+a.offsetWidth/2),hot:cur};
+      if(hit)bar.classList.add('press');
+    });
+    bar.addEventListener('pointermove',function(e){
+      if(!drag||!drag.grab)return;
+      if(!drag.moved){
+        if(Math.abs(e.clientX-drag.sx)<6)return;
+        drag.moved=true;try{bar.setPointerCapture(drag.id)}catch(_){}
+        lens.classList.add('drag');bar.classList.add('dragging');
+      }
+      var w=lens.offsetWidth,last=links[links.length-1],min=links[0].offsetLeft,max=last.offsetLeft+last.offsetWidth-w;
+      var x=Math.max(min,Math.min(max,e.clientX-bar.getBoundingClientRect().left-w/2-drag.off));
+      lens.style.translate=x+'px 0';
+      var c=x+w/2,best=0,bd=1e9;
+      links.forEach(function(l,k){var d=Math.abs(l.offsetLeft+l.offsetWidth/2-c);if(d<bd){bd=d;best=k}});
+      drag.hot=best;links.forEach(function(l,k){l.classList.toggle('hot',k===best)});
+    });
+    function end(){
+      bar.classList.remove('press');
+      if(!drag)return;
+      var d=drag;drag=null;
+      links.forEach(function(l){l.classList.remove('hot')});
+      bar.classList.remove('dragging');
+      if(!d.moved)return;
+      lens.classList.remove('drag');
+      var a=links[d.hot];
+      if(a.target==='_blank'){window.open(a.href,'_blank','noopener');place(cur)}
+      else{go(d.hot);a.click()}
+      try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}
+      sup=true;setTimeout(function(){sup=false},120);
+    }
+    ['dragstart','contextmenu'].forEach(function(t){bar.addEventListener(t,function(e){e.preventDefault()})});
+    bar.addEventListener('pointerup',end);bar.addEventListener('pointercancel',end);
+    bar.addEventListener('click',function(e){if(sup){e.preventDefault();e.stopPropagation()}},true);
+
+    /* Chromium only (Chrome, Edge, Samsung Internet): real edge refraction with an SVG displacement map */
+    var chromium=!!navigator.userAgentData,svg=null;
+    function field(w,h,r,bez){
+      var d=Math.min(devicePixelRatio||1,2),W=Math.round(w*d),H=Math.round(h*d),c=document.createElement('canvas');
+      c.width=W;c.height=H;var x=c.getContext('2d'),im=x.createImageData(W,H),D=im.data;
+      var hw=W/2,hh=H/2,R=r*d,B=bez*d;
+      for(var j=0;j<H;j++)for(var i=0;i<W;i++){
+        var cx=i+.5-hw,cy=j+.5-hh,px=Math.abs(cx)-(hw-R),py=Math.abs(cy)-(hh-R);
+        var ox=Math.max(px,0),oy=Math.max(py,0),out=Math.hypot(ox,oy),sd=out+Math.min(Math.max(px,py),0)-R,dist=-sd,nx=0,ny=0,m=0;
+        if(dist>0&&dist<B){
+          if(out>0){nx=Math.sign(cx)*ox/out;ny=Math.sign(cy)*oy/out}else if(px>py){nx=Math.sign(cx)}else{ny=Math.sign(cy)}
+          var t=dist/B;m=1-Math.sqrt(1-(1-t)*(1-t));
+        }
+        var k=(j*W+i)*4;D[k]=128-nx*m*127;D[k+1]=128-ny*m*127;D[k+2]=128;D[k+3]=255;
+      }
+      x.putImageData(im,0,0);return c.toDataURL();
+    }
+    function maps(){
+      if(!chromium)return;
+      try{
+        var bw=bar.offsetWidth,bh=bar.offsetHeight,lw=lens.offsetWidth,lh=lens.offsetHeight;
+        if(!bw||!lw)return;
+        if(!svg){
+          var ns='http://www.w3.org/2000/svg';svg=document.createElementNS(ns,'svg');
+          svg.setAttribute('width','0');svg.setAttribute('height','0');svg.setAttribute('aria-hidden','true');svg.style.cssText='position:absolute;left:0;top:0';
+          svg.innerHTML='<filter id="lgbar" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feImage id="lgbar-i" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="44" xChannelSelector="R" yChannelSelector="G"/></filter>'+
+            '<filter id="lglens" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feImage id="lglens-i" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="56" xChannelSelector="R" yChannelSelector="G"/></filter>';
+          document.body.appendChild(svg);
+        }
+        function set(id,w,h,r,bez){var im=svg.querySelector('#'+id);im.setAttribute('x','0');im.setAttribute('y','0');im.setAttribute('width',w);im.setAttribute('height',h);im.setAttribute('href',field(w,h,Math.min(r,h/2),bez))}
+        set('lgbar-i',bw,bh,36,16);set('lglens-i',lw,lh,28,18);
+        document.documentElement.style.setProperty('--lgbar','url(#lgbar) blur(.4px)');
+        document.documentElement.style.setProperty('--lglens','url(#lglens)');
+      }catch(e){}
+    }
+    function sync(){place(idxOn(),true);maps()}
+    addEventListener('resize',sync);addEventListener('load',sync);sync();
+    document.getElementById('vswitch').addEventListener('click',function(){setTimeout(sync,60)});
+  })();
+
+  /* ---------- follower goal: manual number now, live number once LIVE_URL is set ---------- */
+  var FOLLOWERS=80;   /* EDIT: your follower count if you are not using the live link, e.g. 87 */
+  var LIVE_URL='';      /* EDIT: your Worker address, e.g. https://n3yfx-followers.YOUR-NAME.workers.dev */
+  var MILES=[100,125],PACKS={100:'Pack 1',125:'Pack 2'};
+  function showGoal(n){
+    var next=null,prev=0,i;
+    for(i=0;i<MILES.length;i++){if(n<MILES[i]){next=MILES[i];break}}
+    for(i=0;i<MILES.length;i++){if(next!==null&&MILES[i]<next&&MILES[i]>prev)prev=MILES[i]}
+    document.getElementById('gcount').textContent=n.toLocaleString('en-IE')+' followers';
+    document.getElementById('gnext').textContent=next?'Next: '+next:'Goal reached';
+    document.getElementById('gbar').style.width=(next?Math.max(2,Math.min(100,(n-prev)/(next-prev)*100)):100)+'%';
+    document.getElementById('gtext').textContent=next?(next-n)+' more to unlock '+PACKS[next]+'.':'All packs unlocked.';
+    document.getElementById('goal').hidden=false;
+  }
+  function pull(){
+    if(!LIVE_URL)return;
+    fetch(LIVE_URL,{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(d&&typeof d.followers==='number')showGoal(d.followers)}).catch(function(){});
+  }
+  if(typeof FOLLOWERS==='number')showGoal(FOLLOWERS);
+  pull();setInterval(function(){if(!document.hidden)pull()},300000);
+
   /* ---------- mobile / desktop site switch ---------- */
   var vs=document.getElementById('vswitch'),root=document.documentElement;
   function label(){vs.textContent=root.dataset.view==='mobile'?'View desktop site':'View mobile site'}
