@@ -113,8 +113,76 @@ pre i{font-style:normal;color:var(--purple)}pre u{text-decoration:none;color:var
 .end .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
 footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125rem;border-top:1px solid var(--line)}
 
+
+/* ===== iOS-style polish (all views) ===== */
+:root{--spring:cubic-bezier(.32,.72,0,1)}
+html{-webkit-text-size-adjust:100%}
+*{-webkit-tap-highlight-color:transparent}
+::selection{background:rgba(41,151,255,.4)}
+nav.bar{height:calc(48px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);background:rgba(18,18,20,.6);backdrop-filter:saturate(200%) blur(30px);-webkit-backdrop-filter:saturate(200%) blur(30px);border-bottom:.5px solid rgba(255,255,255,.14)}
+.bar .in{height:48px}
+.hero{min-height:100vh;min-height:100svh;padding-top:calc(6rem + env(safe-area-inset-top))}
+.pill{transition:transform .4s var(--spring),filter .2s}
+.pill:hover{filter:brightness(1.12)}
+.pill:active{transform:scale(.95)}
+.pill.ghost{background:rgba(41,151,255,.14);border:0;color:#4db0ff}
+.tile,.pack{transition:transform .5s var(--spring);box-shadow:0 0 0 .5px rgba(255,255,255,.14),inset 0 1px 0 rgba(255,255,255,.07)}
+.tile:active,.pack:active{transform:scale(.985)}
+.cover:active .play{scale:.94}
+.vswitch{display:block;margin:.75rem auto 0;padding:.5rem 1rem;background:none;border:0;color:var(--blue);font:inherit;font-size:.8125rem;cursor:pointer}
+.tabbar{display:none}
+
+/* ===== Mobile site (phones, or forced with ?view=mobile / footer link) ===== */
+[data-view=mobile] body{padding-bottom:calc(4.5rem + env(safe-area-inset-bottom))}
+[data-view=mobile] .wrap,[data-view=mobile] .bar .in{max-width:430px;padding-inline:1.25rem}
+[data-view=mobile] .bar ul{display:none}
+[data-view=mobile] .hero-in{width:100%;max-width:430px}
+[data-view=mobile] h1{font-size:min(26vw,6.5rem)}
+[data-view=mobile] h2{font-size:2.25rem}
+[data-view=mobile] .lede{font-size:1.125rem}
+[data-view=mobile] .sub{font-size:1.25rem}
+[data-view=mobile] .big{font-size:1.75rem}
+[data-view=mobile] section{padding-block:3.5rem}
+[data-view=mobile] .cue{display:none}
+[data-view=mobile] .hero .btns,[data-view=mobile] .end .btns{flex-direction:column;align-items:stretch}
+[data-view=mobile] .pill.lg{text-align:center}
+[data-view=mobile] .vids{grid-template-columns:1fr;gap:2rem;margin-top:2.5rem}
+[data-view=mobile] .player{border-radius:1.75rem}
+[data-view=mobile] .bento{grid-template-columns:repeat(2,1fr);margin-top:2.5rem}
+[data-view=mobile] .tile{min-height:11rem;padding:1.25rem;border-radius:1.5rem}
+[data-view=mobile] .tile h3{font-size:1.3rem}
+[data-view=mobile] .num{font-size:3rem}
+[data-view=mobile] .fx{font-size:3.5rem}
+[data-view=mobile] .packs{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;margin:2.5rem -1.25rem 0;padding:0 1.25rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+[data-view=mobile] .packs::-webkit-scrollbar{display:none}
+[data-view=mobile] .pack{flex:0 0 74%;scroll-snap-align:center;border-radius:1.5rem}
+[data-view=mobile] .tabbar{position:fixed;left:50%;translate:-50% 0;bottom:0;z-index:60;width:min(100%,430px);display:flex;justify-content:space-around;padding:.5rem .5rem calc(.5rem + env(safe-area-inset-bottom));background:rgba(22,22,24,.72);backdrop-filter:saturate(200%) blur(30px);-webkit-backdrop-filter:saturate(200%) blur(30px);border-top:.5px solid rgba(255,255,255,.14)}
+.tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:.15rem .9rem;color:#8e8e93;font-size:.625rem;font-weight:500;letter-spacing:0;text-decoration:none;transition:color .25s,transform .4s var(--spring)}
+.tabbar a:active{transform:scale(.9)}
+.tabbar a.on{color:var(--blue)}
+.tabbar svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== older iOS / browsers: graceful fallbacks ===== */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav.bar,.tabbar,.tile{background:rgba(24,24,26,.96)!important}}
+@supports not (aspect-ratio:1){.player{height:0;padding-top:133.333%}}
+
 @media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="n3yfx">
+<meta name="format-detection" content="telephone=no">
+<script>
+/* view = mobile | desktop. Auto by device; override with ?view=mobile, ?view=desktop or the footer link */
+(function(){var d=document.documentElement,ua=navigator.userAgent,v=null,q=null,sv=null;
+try{q=new URLSearchParams(location.search).get('view');if(q==='mobile'||q==='desktop')localStorage.setItem('view',q)}catch(e){}
+try{sv=localStorage.getItem('view')}catch(e){}
+var coarse=matchMedia('(pointer:coarse)').matches;
+var auto=(/iPhone|iPod|Android|SamsungBrowser|Mobile/.test(ua)&&!/iPad|Tablet/.test(ua)&&innerWidth<=900||innerWidth<=700||(coarse&&innerWidth<=900))?'mobile':'desktop';
+v=(q==='mobile'||q==='desktop')?q:(sv==='mobile'||sv==='desktop')?sv:auto;
+d.dataset.view=v;if(/iPhone|iPod|iPad/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))d.classList.add('ios')})();
+</script>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -223,7 +291,13 @@ footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125
   </section>
 </main>
 
-<footer>© <span id="yr">2026</span> n3yfx. All videos belong to their creator.</footer>
+<footer>© <span id="yr">2026</span> n3yfx. All videos belong to their creator.<button id="vswitch" class="vswitch" type="button"></button></footer>
+<nav class="tabbar" aria-label="Tabs">
+  <a href="#top" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg><span>Home</span></a>
+  <a href="#work"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span>Previews</span></a>
+  <a href="#packs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Packs</span></a>
+  <a href="https://www.tiktok.com/@newn3yfx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span>TikTok</span></a>
+</nav>
 
 <script>
 (function(){
@@ -237,7 +311,7 @@ footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125
   function size(){
     D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
     c.width=W*D;c.height=H*D;g.setTransform(D,0,0,D,0,0);
-    var n=Math.min(Math.round(W*H/3200),650);stars=[];
+    var n=Math.min(Math.round(W*H/3200),document.documentElement.dataset.view==='mobile'?280:650);stars=[];
     for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,z:Math.pow(Math.random(),2)*.9+.1,p:Math.random()*6.28,s:Math.random()*1.5+.4,c:tints[i%tints.length]});
     if(RM)draw(0);
   }
@@ -275,6 +349,7 @@ footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125
   var words=rev.textContent.trim().split(/\s+/);
   rev.innerHTML=words.map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
   var spans=rev.querySelectorAll('.w');
+  var tabs=document.querySelectorAll('.tabbar a[href^="#"]');
   function onScroll(){
     var p=Math.min(scrollY/(innerHeight*.8),1);
     if(!RM){hero.style.transform='scale('+(1-p*.18)+') translateY('+(-p*50)+'px)';hero.style.opacity=1-p*1.1}
@@ -282,6 +357,8 @@ footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125
     prog=Math.max(0,Math.min(1,prog));
     var n=Math.round(prog*spans.length);
     for(var i=0;i<spans.length;i++)spans[i].classList.toggle('on',RM||i<n);
+    var cur='top';['work','packs'].forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<innerHeight*.45)cur=id});
+    tabs.forEach(function(t){t.classList.toggle('on',t.getAttribute('href')==='#'+cur)});
   }
   addEventListener('scroll',onScroll,{passive:true});onScroll();
 
@@ -315,6 +392,15 @@ footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125
     (function step(t){var k=Math.min((t-t0)/1200,1);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&!RM)requestAnimationFrame(step);else el.textContent=to})(t0);
   })},{threshold:.6});
   document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el)});
+  /* ---------- mobile / desktop site switch ---------- */
+  var vs=document.getElementById('vswitch'),root=document.documentElement;
+  function label(){vs.textContent=root.dataset.view==='mobile'?'View desktop site':'View mobile site'}
+  vs.addEventListener('click',function(){
+    var v=root.dataset.view==='mobile'?'desktop':'mobile';root.dataset.view=v;
+    try{localStorage.setItem('view',v)}catch(e){}
+    label();size();onScroll();scrollTo(0,0);
+  });
+  label();
 })();
 </script>
 </body>
