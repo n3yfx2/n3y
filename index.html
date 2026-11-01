@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>n3yfx – video edits &amp; effects</title>
+<meta name="description" content="Portfolio of n3yfx: short-form video edits and effects, posted on TikTok.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="n3yfx">
+<meta property="og:description" content="Short-form video edits and effects. Follow @n3yfx on TikTok.">
+<meta property="og:image" content="videos/last-christmas.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Inter is only a fallback for non-Apple devices; Apple devices use San Francisco -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --card:#1c1c1e; --text:#f5f5f7; --gray:#86868b; --line:rgba(255,255,255,.12);
+  --blue:#2997ff; --purple:#bf5af2; --pink:#ff375f;
+  --sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Inter,system-ui,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --pad:clamp(1.25rem,5vw,3rem);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;background:#000}
+body{background:transparent;color:var(--text);font:400 1.0625rem/1.5 var(--sf);letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+#sky{position:fixed;inset:0;z-index:-1;background:#000}
+.wrap{max-width:75rem;margin:0 auto;padding:0 var(--pad)}
+
+/* glass nav, 48px like apple.com */
+nav.bar{position:fixed;top:0;left:0;right:0;z-index:50;height:48px;background:rgba(0,0,0,.55);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid var(--line)}
+.bar .in{max-width:75rem;height:100%;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between}
+.bar .logo{font-weight:700;text-decoration:none;letter-spacing:-.02em}
+.bar ul{display:flex;gap:1.75rem;list-style:none;padding:0}
+.bar ul a{font-size:.8125rem;color:#d2d2d7;text-decoration:none}
+.bar ul a:hover{color:#fff}
+.pill{display:inline-block;padding:.45rem 1rem;border-radius:980px;background:var(--blue);color:#fff;font-size:.8125rem;font-weight:500;text-decoration:none}
+.pill.lg{padding:.8rem 1.6rem;font-size:1.0625rem}
+.pill.ghost{background:transparent;border:1px solid var(--blue);color:var(--blue)}
+@media(max-width:36rem){.bar ul{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:6rem var(--pad) 4rem}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(40rem 22rem at 30% 40%,rgba(41,151,255,.22),transparent 70%),radial-gradient(34rem 20rem at 70% 55%,rgba(191,90,242,.2),transparent 70%),radial-gradient(26rem 16rem at 50% 75%,rgba(255,55,95,.14),transparent 70%);pointer-events:none}
+.hero-in{position:relative;will-change:transform,opacity}
+h1{font-size:clamp(5rem,26vw,19rem);font-weight:800;line-height:.9;letter-spacing:-.06em;background:linear-gradient(180deg,#fff 20%,#6e6e73 110%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.sub{margin:1.25rem auto 0;max-width:38rem;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:600;letter-spacing:-.02em;line-height:1.25;color:#d2d2d7}
+.sub span{color:var(--gray)}
+.hero .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.cue{position:absolute;bottom:1.75rem;left:50%;translate:-50% 0;width:1.5rem;height:2.4rem;border:2px solid #6e6e73;border-radius:1rem}
+.cue::after{content:"";position:absolute;left:50%;top:.45rem;width:3px;height:.5rem;margin-left:-1.5px;border-radius:2px;background:#d2d2d7;animation:cue 1.8s infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(.9rem)}}
+
+section{padding-block:clamp(4rem,10vw,8rem)}
+h2{font-size:clamp(2.25rem,6vw,4.5rem);font-weight:700;line-height:1.05;letter-spacing:-.04em}
+.grad{background:linear-gradient(90deg,var(--blue),var(--purple) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin-top:1rem;max-width:34rem;font-size:1.3125rem;line-height:1.3;color:var(--gray);letter-spacing:-.015em}
+
+/* video previews */
+.vids{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:3.5rem}
+@media(min-width:52rem){.vids{grid-template-columns:1fr 1fr;gap:2rem}}
+.player{position:relative;aspect-ratio:3/4;border-radius:2rem;overflow:hidden;background:#111;box-shadow:0 0 0 1px var(--line),0 30px 80px -20px rgba(41,151,255,.25);transform-style:preserve-3d;transition:transform .2s ease-out}
+.player video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.player .cover{position:absolute;inset:0;border:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.75));color:#fff;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;text-align:left;padding:1.75rem;font:inherit;transition:opacity .3s}
+.player.playing .cover{opacity:0;pointer-events:none}
+.cover .play{position:absolute;top:50%;left:50%;translate:-50% -50%;width:5rem;height:5rem;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:grid;place-items:center;transition:scale .2s}
+.cover:hover .play{scale:1.08}
+.play svg{width:1.8rem;height:1.8rem;margin-left:.2rem;fill:#fff}
+.cover b{font-size:1.75rem;font-weight:700;letter-spacing:-.03em}
+.cover small{margin-top:.15rem;font-size:.95rem;color:#d2d2d7}
+.tt{display:inline-block;margin-top:1rem;font-size:.95rem;color:var(--blue);text-decoration:none}
+.tt:hover{text-decoration:underline}
+
+/* about, word reveal */
+.big{font-size:clamp(1.75rem,4.6vw,3.5rem);font-weight:700;line-height:1.12;letter-spacing:-.035em;max-width:62rem}
+.big .w{opacity:.2;transition:opacity .25s}
+.big .w.on{opacity:1}
+
+/* bento */
+.bento{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr);margin-top:3.5rem}
+@media(min-width:52rem){.bento{grid-template-columns:repeat(4,1fr)}}
+.tile{position:relative;overflow:hidden;min-height:15rem;padding:1.75rem;border-radius:1.75rem;background:rgba(28,28,30,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 1px var(--line);transition:transform .2s ease-out;transform-style:preserve-3d}
+.tile::before{content:"";position:absolute;inset:0;background:radial-gradient(18rem circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.12),transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}
+.tile:hover::before{opacity:1}
+.tile h3{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.tile p{margin-top:.5rem;color:var(--gray);font-size:1rem;line-height:1.35}
+.s2{grid-column:span 2}
+.fx{margin-top:1.25rem;font-size:5rem;font-weight:800;letter-spacing:-.05em;line-height:1;position:relative;width:fit-content}
+.fx::before,.fx::after{content:attr(data-t);position:absolute;inset:0;mix-blend-mode:screen}
+.fx::before{color:#ff375f;animation:g1 2.4s infinite steps(1)}
+.fx::after{color:#2997ff;animation:g2 2.4s infinite steps(1)}
+@keyframes g1{0%,100%{transform:translate(-3px,0)}20%{transform:translate(-9px,2px)}45%{transform:translate(-2px,-2px)}70%{transform:translate(-12px,0)}}
+@keyframes g2{0%,100%{transform:translate(3px,0)}20%{transform:translate(8px,-2px)}45%{transform:translate(2px,2px)}70%{transform:translate(11px,0)}}
+pre{margin-top:1.25rem;font:.8rem/1.6 var(--mono);color:#d2d2d7;white-space:pre-wrap}
+pre i{font-style:normal;color:var(--purple)}pre u{text-decoration:none;color:var(--blue)}pre s{text-decoration:none;color:#30d158}
+.num{font-size:clamp(3rem,7vw,4.5rem);font-weight:800;letter-spacing:-.05em;line-height:1}
+.num+p{margin-top:.4rem}
+
+/* contact */
+.end{text-align:center}
+.end .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+footer{padding:2.5rem var(--pad);text-align:center;color:#6e6e73;font-size:.8125rem;border-top:1px solid var(--line)}
+
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<nav class="bar" aria-label="Main">
+  <div class="in">
+    <a class="logo" href="#top">n3yfx</a>
+    <ul><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li></ul>
+    <a class="pill" href="https://www.tiktok.com/@n3yfx" target="_blank" rel="noopener">Follow</a>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <div class="hero-in" id="heroIn">
+      <h1>n3yfx</h1>
+      <p class="sub">Video edits and effects. <span>Short clips built to make people stop scrolling.</span></p>
+      <div class="btns">
+        <a class="pill lg" href="#work">Watch the previews</a>
+        <a class="pill lg ghost" href="https://www.tiktok.com/@n3yfx" target="_blank" rel="noopener">@n3yfx on TikTok</a>
+      </div>
+    </div>
+    <div class="cue" aria-hidden="true"></div>
+  </header>
+
+  <section id="work">
+    <div class="wrap">
+      <h2>Previews. <span class="grad">Full quality.</span></h2>
+      <p class="lede">Two recent edits, played at the original 1440 × 1920 resolution. Press play.</p>
+      <div class="vids">
+        <!-- EDIT: change titles and the TikTok links -->
+        <article>
+          <div class="player tilt">
+            <video src="videos/last-christmas.mp4" poster="videos/last-christmas.jpg" preload="none" playsinline loop></video>
+            <button class="cover" aria-label="Play Last Christmas"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span><b>Last Christmas</b><small>Edit · 15s</small></button>
+          </div>
+          <a class="tt" href="https://www.tiktok.com/@n3yfx" target="_blank" rel="noopener">Watch on TikTok</a>
+        </article>
+        <article>
+          <div class="player tilt">
+            <video src="videos/gataaaaa.mp4" poster="videos/gataaaaa.jpg" preload="none" playsinline loop></video>
+            <button class="cover" aria-label="Play Gataaaaa"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span><b>Gataaaaa</b><small>Edit · 16s</small></button>
+          </div>
+          <a class="tt" href="https://www.tiktok.com/@n3yfx" target="_blank" rel="noopener">Watch on TikTok</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="big" id="reveal">I’m n3yfx. I edit short videos and build the effects inside them: glitches, colour splits, speed ramps and transitions. I also write code, so I make my own tools and every pixel of this site by hand.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>What I <span class="grad">make.</span></h2>
+      <div class="bento">
+        <div class="tile s2 tilt">
+          <h3>Edits</h3>
+          <p>Tight cuts, beat-synced timing and clean pacing for TikTok, Reels and Shorts.</p>
+          <div class="num grad" style="margin-top:1.5rem">9:16</div>
+        </div>
+        <div class="tile s2 tilt">
+          <h3>Effects</h3>
+          <p>Glitch, chromatic splits and motion that looks like the screen is breaking.</p>
+          <div class="fx" data-t="FX" aria-hidden="true">FX</div>
+        </div>
+        <div class="tile s2 tilt">
+          <h3>Code</h3>
+          <p>I build browser tools and games.</p>
+<pre><i>const</i> <u>edit</u> = {
+  fps: <s>60</s>,
+  size: <s>"1440x1920"</s>,
+  style: <s>"n3yfx"</s>
+};</pre>
+        </div>
+        <div class="tile tilt"><div class="num" data-count="2">0</div><p>previews on this page</p></div>
+        <div class="tile tilt"><div class="num" data-count="60">0</div><p>frames per second</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="end">
+    <div class="wrap">
+      <h2>Let’s make <span class="grad">something.</span></h2>
+      <p class="lede" style="margin-inline:auto">Want an edit, a collab or a custom effect? Say hi.</p>
+      <div class="btns">
+        <a class="pill lg" href="https://www.tiktok.com/@n3yfx" target="_blank" rel="noopener">Message on TikTok</a>
+        <a class="pill lg ghost" href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill lg ghost" href="mailto:you@example.com">Email</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="yr">2026</span> n3yfx. All videos belong to their creator.</footer>
+
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---------- starfield: 3 depth layers, mouse parallax, scroll warp, shooting stars ---------- */
+  var c = document.getElementById('sky'), g = c.getContext('2d');
+  var W,H,D,stars=[],shoots=[],mx=0,my=0,tx=0,ty=0,vel=0,lastY=scrollY,nextShoot=2000;
+  var tints=['#ffffff','#ffffff','#ffffff','#9ecbff','#ffd9a8','#e0c6ff'];
+  function size(){
+    D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+    c.width=W*D;c.height=H*D;g.setTransform(D,0,0,D,0,0);
+    var n=Math.min(Math.round(W*H/3200),650);stars=[];
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,z:Math.pow(Math.random(),2)*.9+.1,p:Math.random()*6.28,s:Math.random()*1.5+.4,c:tints[i%tints.length]});
+    if(RM)draw(0);
+  }
+  function mod(a,m){return((a%m)+m)%m}
+  function draw(t){
+    g.clearRect(0,0,W,H);
+    tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
+    vel+=(Math.min(Math.abs(scrollY-lastY),80)-vel)*.12;lastY=scrollY;
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i],px=mod(s.x+tx*s.z*40,W),py=mod(s.y-scrollY*s.z*.2+ty*s.z*40,H);
+      var a=RM?.8*s.z+.2:(.3+.7*(.5+.5*Math.sin(t*.001*s.s+s.p)))*(.35+.65*s.z);
+      g.globalAlpha=a;g.strokeStyle=g.fillStyle=s.c;
+      if(vel>2.5){g.lineWidth=s.z*1.3;g.beginPath();g.moveTo(px,py);g.lineTo(px,py+vel*s.z*1.6);g.stroke()}
+      else{g.beginPath();g.arc(px,py,s.z*1.5+.2,0,6.283);g.fill()}
+    }
+    g.globalAlpha=1;
+    if(!RM){
+      if(t>nextShoot){nextShoot=t+3500+Math.random()*5000;
+        shoots.push({x:W*(.3+Math.random()*.7),y:Math.random()*H*.45,vx:-9-Math.random()*6,vy:4+Math.random()*3,l:1})}
+      for(var k=shoots.length-1;k>=0;k--){
+        var m=shoots[k];m.x+=m.vx;m.y+=m.vy;m.l-=.012;
+        if(m.l<=0){shoots.splice(k,1);continue}
+        var gr=g.createLinearGradient(m.x,m.y,m.x-m.vx*9,m.y-m.vy*9);
+        gr.addColorStop(0,'rgba(255,255,255,'+m.l+')');gr.addColorStop(1,'rgba(255,255,255,0)');
+        g.strokeStyle=gr;g.lineWidth=1.6;g.beginPath();g.moveTo(m.x,m.y);g.lineTo(m.x-m.vx*9,m.y-m.vy*9);g.stroke();
+      }
+    }
+  }
+  function loop(t){draw(t);requestAnimationFrame(loop)}
+  addEventListener('resize',size);size();
+  if(!RM){requestAnimationFrame(loop);addEventListener('pointermove',function(e){mx=e.clientX/W-.5;my=e.clientY/H-.5})}
+
+  /* ---------- scroll-linked hero + word reveal ---------- */
+  var hero=document.getElementById('heroIn'),rev=document.getElementById('reveal');
+  var words=rev.textContent.trim().split(/\s+/);
+  rev.innerHTML=words.map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+  var spans=rev.querySelectorAll('.w');
+  function onScroll(){
+    var p=Math.min(scrollY/(innerHeight*.8),1);
+    if(!RM){hero.style.transform='scale('+(1-p*.18)+') translateY('+(-p*50)+'px)';hero.style.opacity=1-p*1.1}
+    var r=rev.getBoundingClientRect(),prog=(innerHeight*.85-r.top)/(innerHeight*.6+r.height*.4);
+    prog=Math.max(0,Math.min(1,prog));
+    var n=Math.round(prog*spans.length);
+    for(var i=0;i<spans.length;i++)spans[i].classList.toggle('on',RM||i<n);
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* ---------- tilt + spotlight ---------- */
+  document.querySelectorAll('.tilt').forEach(function(el){
+    el.addEventListener('pointermove',function(e){
+      var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      el.style.setProperty('--mx',x*100+'%');el.style.setProperty('--my',y*100+'%');
+      if(!RM&&e.pointerType==='mouse')el.style.transform='perspective(900px) rotateX('+((.5-y)*5)+'deg) rotateY('+((x-.5)*6)+'deg)';
+    });
+    el.addEventListener('pointerleave',function(){el.style.transform=''});
+  });
+
+  /* ---------- video players: load on tap, one at a time, native controls once playing ---------- */
+  var players=document.querySelectorAll('.player');
+  players.forEach(function(p){
+    var v=p.querySelector('video'),b=p.querySelector('.cover');
+    b.addEventListener('click',function(){
+      players.forEach(function(o){if(o!==p){var ov=o.querySelector('video');ov.pause();o.classList.remove('playing')}});
+      v.controls=true;v.preload='auto';
+      v.play().then(function(){p.classList.add('playing')}).catch(function(){v.muted=true;v.play();p.classList.add('playing')});
+    });
+    v.addEventListener('pause',function(){if(!v.seeking&&!v.ended){p.classList.remove('playing')}});
+    v.addEventListener('play',function(){p.classList.add('playing')});
+  });
+
+  /* ---------- count-up numbers ---------- */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;io.unobserve(e.target);
+    var el=e.target,to=+el.dataset.count,t0=performance.now();
+    (function step(t){var k=Math.min((t-t0)/1200,1);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&!RM)requestAnimationFrame(step);else el.textContent=to})(t0);
+  })},{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
